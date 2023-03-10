@@ -1,12 +1,12 @@
 /*------------------------------------------------------*/
 /* Prog    : Tp3_IFT3205-2-2.c                          */
-/* Auteur  :                                            */
+/* Auteur  : Élie Leblanc, Justin Veilleux              */
 /* Date    : --/--/2010                                 */
 /* version :                                            */ 
 /* langage : C                                          */
 /* labo    : DIRO                                       */
 /*------------------------------------------------------*/
-
+// elie.leblanc@umontreal.ca justin.veilleux@umontreal.ca
 /*------------------------------------------------*/
 /* FICHIERS INCLUS -------------------------------*/
 /*------------------------------------------------*/
@@ -16,6 +16,7 @@
 #include <string.h>
 
 #include "FonctionDemo3.h"
+#include "fonctions.c"
 
 /*------------------------------------------------*/
 /* DEFINITIONS -----------------------------------*/   
@@ -43,10 +44,14 @@ int main(int argc,char **argv)
   float** MatriceImg2=fmatrix_allocate_2d(length*4,width*4);
 
   //Interpolation 
-  //......
+  for (i = 0; i < length*4; i++) {
+	for (j = 0; j < width*4; j++) {
+      	    MatriceImg2[i][j]=MatriceImg1[(int)round(i/4)][(int)round(j/4)];
+    }
+  }  
  
   //Sauvegarde
-  SaveImagePgm(NAME_IMG_OUT,MatriceImg1,length,width);
+  SaveImagePgm(NAME_IMG_OUT,MatriceImg2,length*4,width*4);
 
   //Commande systeme: VISU
   strcpy(BufSystVisuImg,NAME_VISUALISER);
