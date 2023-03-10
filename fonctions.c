@@ -70,9 +70,44 @@ void rotation(int length, int width, float angle, float ** mat_src, float ** mat
     }
 }
 
-void interpol_lin(float** img, float x_coord, float y_coord)
+int max(int a, int b) {
+    if (a > b) {
+        return a;
+    }else{
+        return b;
+    }
+}
+
+int min(int a, int b) {
+    if (a < b) {
+        return a;
+    }else{
+        return b;
+    }
+}
+
+float interpol_lin(float** img, int h, int w, float x_src, float y_src)
 {
-	
+    int up = (int)floor(y_src);
+    up = max(0, up);
+    int down = (int)ceil(y_src);
+    down = min(h - 1, down);
+    int left = (int)floor(x_src);
+    left = max(0, left);
+    int right = (int)ceil(x_src);
+    right = min(w - 1, right);
+
+    float col_up =
+        (x_src - left) * img[right][up] +
+        (right - x_src) * img[left][up];
+    float col_down = 
+        (x_src - left) * img[right][down] +
+        (right - x_src) * img[left][down];
+
+    float col_vert = (y_src - up) * col_down +
+        (down - y_src) * col_up;
+
+    return col_vert;
 }
 
 void fmatrix_move(int length, int width, float ** src, float ** dst) {
