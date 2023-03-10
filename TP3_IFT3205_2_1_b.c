@@ -46,7 +46,7 @@ int main(int argc,char **argv)
   //Interpolation 
   for (i = 0; i < length*4; i++) {
 	for (j = 0; j < width*4; j++) {
-      	    MatriceImg2[i][j]=MatriceImg1[(int)round(i/4)][(int)round(j/4)];
+      	    MatriceImg2[i][j]=interpol_lin(MatriceImg1, i/4.0f, j/4.0f);
     }
   }  
  
