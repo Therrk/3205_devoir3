@@ -138,3 +138,38 @@ void fmatrix_zero(int length, int width, float ** mat) {
         }
     }
 }
+
+//Fonction pour centrer l'image, tirée verbatim de FonctionDemo2.h
+void CenterImg(float** mat,int lgth,int wdth)
+{
+ int i,j;
+ int ci,cj;
+ float** mattmp;
+
+ /*Initialisation*/
+ ci=(int)(lgth/2);
+ cj=(int)(wdth/2);
+
+ /*Allocation memoire*/
+ mattmp=fmatrix_allocate_2d(lgth,wdth);
+
+ /*Recadrage*/
+ for(i=0;i<ci;i++) for(j=0;j<cj;j++)
+ mattmp[ci+i][cj+j]=mat[i][j];
+
+ for(i=ci;i<lgth;i++) for(j=cj;j<wdth;j++)
+ mattmp[i-ci][j-cj]=mat[i][j];
+
+ for(i=0;i<ci;i++) for(j=cj;j<wdth;j++)
+ mattmp[ci+i][j-cj]=mat[i][j];
+
+ for(i=ci;i<lgth;i++) for(j=0;j<cj;j++)
+ mattmp[i-ci][cj+j]=mat[i][j];
+
+ /*Transfert*/
+ for(i=0;i<lgth;i++) for(j=0;j<wdth;j++)
+  mat[i][j]=mattmp[i][j];
+
+ /*desallocation memoire*/
+ free_fmatrix_2d(mattmp);
+}
