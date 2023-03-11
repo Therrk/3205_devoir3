@@ -1,0 +1,3 @@
+On peut facilement trouver le facteur de normalisaion à l'aide de la conservation de l'énergie dans la TF. En effet, comme l'image est 4 fois plus grande,
+elle contient 16 fois plus de pixels. L'énergie du signal est maintenant divisée parmis tous ses pixels, qui vont donc paraitre plus foncés. Il faut donc
+multiplier la valeur dans chacuns des pixels par 16, pour rammener l'énergie au même niveau. 
