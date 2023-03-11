@@ -3,6 +3,24 @@
 
 * Interpolation spectrale
 
+** Comparaison question c
+
+En général, la qualitée de l'image obtenue en utilisant la TF est supérieure.
+Dans l'image obtenue par interpolation bilinéaire, on devine encore les pixels de 
+l'image originale, mais pas dans celle obtenue par TF. Par contre, l'aggrandissement
+d'image par interpolation bilinéaire crée beaucoup moins d'artefacts dans l'image
+obtenue. Dès que l'image à une zone ou deux zones à haut contraste se rencontrent,
+on peut voir des lignes parallèles à la bordure. On peut analyser les artefacts
+de deux manières. On peut les voir soit comme un artefact de la "suppression"
+des hautes fréquences dans une image de 512 pixels. En effet, la transformation 
+que l'on as fait à l'image est annalogue à la transformation que l'on ferais à une
+image de 512x512 pixels à laquelle on supprimerais les hautes fréquences. On
+peut aussi les voir comme des artefacts de la convolution avec le sinus cardinal.
+En effet, c'est évidemment dans les zones à haut contraste que la non-périodicité
+de l'image affecteras le plus le résultat de la convolution. L'aggrandissement
+crée aussi des zones blanches, mais nous ne sommes pas parvenus à expliquer
+leur origine.
+
 ** 2
 
 On peut facilement trouver le facteur de normalisaion à l'aide de la
@@ -23,6 +41,11 @@ la valeur de chaque pixel pax \( 4^2 = 16 \).
 ** 3
 
 Si on prend la transformée de fourier de l'image avec la dégradation, puis qu'on
-filtre avec un seuil, on va obtenir une version basse fréquence de l'image.
-Cette version basse fréquence ne contiendra plus beaucoup de signal provenant de
-la dégradation, qui est elle-même de haute fréquence.
+filtre avec un seuil, on va obtenir une version de l'image ou on as enlevé les
+fréquences de basse amplitudes. Si l'on voit la dégradation comme une addition
+de fonctions portes, on trouve que la TF de la dégradation est contsitutée d'une
+addition de sinus cardinal. Comme l'image sinus cardinal est entre 1 et -1, il
+ajoute surtout des fréquences de basse amplitude dans le domaine spectral. En
+les enlevant, on peut enlever presque tout ce qui ressemble à une fonction 
+porte dans l'image originale, et on ne remplace que les pixels dégradés.
+En itérant, on peut graduellement remplir les trous.q  
