@@ -1,0 +1,28 @@
+#+TITLE: Rapport
+#+OPTIONS: num:nil
+
+* Interpolation spectrale
+
+** 2
+
+On peut facilement trouver le facteur de normalisaion à l'aide de la
+conservation de l'énergie dans la TF. En effet, comme l'image est 4 fois plus
+grande dans les deux axes, elle contient 16 fois plus de pixels. L'énergie du
+signal est maintenant divisée parmis tous ses pixels, qui vont donc paraître 16
+fois plus foncés. Il faut donc multiplier la valeur dans chacuns des pixels (ou
+de chaque fréquence) par 16 pour ramener l'énergie moyenne par pixel au même
+niveau.
+
+** 3
+
+Puisque la transformée de fourier est une opération linéaire, on peut multiplier
+la valeur de chaque pixel pax \( 4^2 = 16 \).
+
+* Interpolation spectrale par seuillage
+
+** 3
+
+Si on prend la transformée de fourier de l'image avec la dégradation, puis qu'on
+filtre avec un seuil, on va obtenir une version basse fréquence de l'image.
+Cette version basse fréquence ne contiendra plus beaucoup de signal provenant de
+la dégradation, qui est elle-même de haute fréquence.

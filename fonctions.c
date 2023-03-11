@@ -29,7 +29,6 @@ void rotation(int length, int width, float angle, float ** mat_src, float ** mat
             float x_src = (x_centered*cos(angle) + y_centered*sin(angle)) + half_width;
             float y_src = (x_centered*-sin(angle) + y_centered*cos(angle)) + half_length;
 
-
             int up = (int)floor(y_src);
             int down = (int)ceil(y_src);
             int left = (int)floor(x_src);
@@ -142,34 +141,49 @@ void fmatrix_zero(int length, int width, float ** mat) {
 //Fonction pour centrer l'image, tirée verbatim de FonctionDemo2.h
 void CenterImg(float** mat,int lgth,int wdth)
 {
- int i,j;
- int ci,cj;
- float** mattmp;
+    int i,j;
+    int ci,cj;
+    float** mattmp;
 
- /*Initialisation*/
- ci=(int)(lgth/2);
- cj=(int)(wdth/2);
+    /*Initialisation*/
+    ci=(int)(lgth/2);
+    cj=(int)(wdth/2);
 
- /*Allocation memoire*/
- mattmp=fmatrix_allocate_2d(lgth,wdth);
+    /*Allocation memoire*/
+    mattmp=fmatrix_allocate_2d(lgth,wdth);
 
- /*Recadrage*/
- for(i=0;i<ci;i++) for(j=0;j<cj;j++)
- mattmp[ci+i][cj+j]=mat[i][j];
+    /*Recadrage*/
+    for(i=0;i<ci;i++) for(j=0;j<cj;j++)
+                          mattmp[ci+i][cj+j]=mat[i][j];
 
- for(i=ci;i<lgth;i++) for(j=cj;j<wdth;j++)
- mattmp[i-ci][j-cj]=mat[i][j];
+    for(i=ci;i<lgth;i++) for(j=cj;j<wdth;j++)
+                             mattmp[i-ci][j-cj]=mat[i][j];
 
- for(i=0;i<ci;i++) for(j=cj;j<wdth;j++)
- mattmp[ci+i][j-cj]=mat[i][j];
+    for(i=0;i<ci;i++) for(j=cj;j<wdth;j++)
+                          mattmp[ci+i][j-cj]=mat[i][j];
 
- for(i=ci;i<lgth;i++) for(j=0;j<cj;j++)
- mattmp[i-ci][cj+j]=mat[i][j];
+    for(i=ci;i<lgth;i++) for(j=0;j<cj;j++)
+                             mattmp[i-ci][cj+j]=mat[i][j];
 
- /*Transfert*/
- for(i=0;i<lgth;i++) for(j=0;j<wdth;j++)
-  mat[i][j]=mattmp[i][j];
+    /*Transfert*/
+    for(i=0;i<lgth;i++) for(j=0;j<wdth;j++)
+                            mat[i][j]=mattmp[i][j];
 
- /*desallocation memoire*/
- free_fmatrix_2d(mattmp);
+    /*desallocation memoire*/
+    free_fmatrix_2d(mattmp);
+}
+
+float norm(float a, float b) {
+    return sqrt(a * a + b * b);
+}
+
+void threshold(float**matR, float**matI, int length, int width, float norm_min) {
+    for (int i = 0;i < length;i++) {
+        for (int j = 0;j < width;j++) {
+            if (norm(matR[i][j], matI[i][j]) < norm_min) {
+                matR[i][j] = 0.0;
+                matI[i][j] = 0.0;
+            }
+        }
+    } 
 }
