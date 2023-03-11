@@ -52,6 +52,8 @@ void    SaveImagePgm(char*,float**,int,int);
 void    fourn(float*,unsigned long*,int,int);
 void    FFTDD(float**,float**,int,int);
 void    IFFTDD(float**,float**,int,int);
+void    DFT(float**,float**,int,int);
+void    IDFT(float**,float**,int,int);
 void    Mod(float**,float**,float**,int,int);
 void    Mult(float**,float,int,int);
 void    Recal(float**,int,int);
